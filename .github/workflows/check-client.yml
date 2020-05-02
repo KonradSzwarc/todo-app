@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Front-end
 
 on:
   push:
@@ -15,6 +15,7 @@ defaults:
 
 jobs:
   build:
+    name: Create the build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,6 +25,7 @@ jobs:
       - run: yarn --frozen-lockfile
       - run: yarn build --if-present
   test:
+    name: Execute tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -33,6 +35,7 @@ jobs:
       - run: yarn --frozen-lockfile
       - run: yarn test
   lint:
+    name: Run ESLint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -42,6 +45,7 @@ jobs:
       - run: yarn --frozen-lockfile
       - run: yarn check:lint
   typecheck:
+    name: Check types
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
