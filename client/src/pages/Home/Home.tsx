@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Avatar } from '@components/atoms/Avatar';
@@ -8,12 +8,6 @@ import { Button } from '@components/atoms/Button';
 export const Home = () => {
   const { t } = useTranslation('translation');
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // console.log(ref.current);
-  });
-
-  console.log(t('Hello world'));
 
   return (
     <div className="App">
@@ -30,7 +24,7 @@ export const Home = () => {
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
+          {t('Hello world')}
         </a>
       </header>
     </div>

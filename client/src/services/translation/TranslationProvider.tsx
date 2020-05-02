@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, useRef } from 'react';
 import i18n from 'i18next';
 import XHR from 'i18next-xhr-backend';
 import { I18nextProvider } from 'react-i18next';
@@ -33,7 +33,9 @@ const useKeySequence = (sequence: string, callback: () => void) => {
 };
 
 export const PureTranslationProvider: FC<TranslationProviderProps> = memo(
-  ({ children, language }) => {
+  ({ children, language = 'en' }) => {
+    const initialized = useRef(false);
+
     useKeySequence('langg', () => {
       const newLang = i18n.language === Language.PL ? Language.EN : Language.PL;
 
@@ -42,22 +44,33 @@ export const PureTranslationProvider: FC<TranslationProviderProps> = memo(
       });
     });
 
-    useEffectOnce(() => {
-      i18n
-        .use(XHR)
-        .use(LanguageDetector)
-        .init({
+    if (!initialized.current) {
+      initialized.current = true;
+
+      if (process.env.NODE_ENV === 'test') {
+        i18n.init({
           lng: language,
           fallbackLng: Language.EN,
-          load: 'languageOnly',
-          whitelist: Object.values(Language),
-          defaultNS: 'translation',
-          keySeparator: false,
-          interpolation: {
-            escapeValue: false,
+          resources: {
+            en: {},
+            pl: {},
           },
+          interpolation: { escapeValue: false },
         });
-    });
+      } else {
+        i18n
+          .use(XHR)
+          .use(LanguageDetector)
+          .init({
+            lng: language,
+            fallbackLng: Language.EN,
+            load: 'languageOnly',
+            whitelist: Object.values(Language),
+            defaultNS: 'translation',
+            interpolation: { escapeValue: false },
+          });
+      }
+    }
 
     useEffect(() => {
       if (language && i18n.languages && language !== i18n.languages[0]) {

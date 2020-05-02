@@ -5,14 +5,17 @@ import { queries, Queries } from '@testing-library/dom';
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import { FC } from '@typings/components';
 import { PureThemeProvider } from '@services/theme';
+import { PureTranslationProvider } from '@services/translation';
 
 type ProvidersProps = {};
 
 const Providers: FC = ({ children }) => {
   return (
-    <PureThemeProvider language="en" theme="light">
-      <BrowserRouter>{children}</BrowserRouter>
-    </PureThemeProvider>
+    <PureTranslationProvider>
+      <PureThemeProvider language="en" theme="light">
+        <BrowserRouter>{children}</BrowserRouter>
+      </PureThemeProvider>
+    </PureTranslationProvider>
   );
 };
 
