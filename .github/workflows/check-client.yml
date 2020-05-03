@@ -27,7 +27,7 @@ jobs:
         id: hello
       # This step prints an output (time) from the previous step's action.
       - name: Echo the greeting's time
-        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+        run: echo 'The time was ${{ runner.temp }}.'
   test:
     name: Execute tests
     runs-on: ubuntu-latest
@@ -78,5 +78,5 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.TEST_NETLIFY_SITE_ID }}
         with:
-          args: deploy --dir=${{ cwd }}/build
+          args: deploy --dir=build
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
