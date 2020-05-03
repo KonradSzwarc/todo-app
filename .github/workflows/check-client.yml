@@ -57,9 +57,11 @@ jobs:
       - run: yarn --frozen-lockfile
       - run: yarn build --if-present
       - run: ls -la
+      - run: cwd
 
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
+        run: cwd
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.TEST_NETLIFY_SITE_ID }}
