@@ -13,36 +13,36 @@ defaults:
     working-directory: client
 
 jobs:
-  # test:
-  #   name: Execute tests
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 14
-  #     - run: yarn --frozen-lockfile
-  #     - run: yarn test
-  # lint:
-  #   name: Run ESLint
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 14
-  #     - run: yarn --frozen-lockfile
-  #     - run: yarn check:lint
-  # typecheck:
-  #   name: Check types
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 14
-  #     - run: yarn --frozen-lockfile
-  #     - run: yarn check:types
+  test:
+    name: Execute tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: yarn --frozen-lockfile
+      - run: yarn test
+  lint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: yarn --frozen-lockfile
+      - run: yarn check:lint
+  typecheck:
+    name: Check types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: yarn --frozen-lockfile
+      - run: yarn check:types
   preview:
     name: Create app preview
     runs-on: ubuntu-latest
@@ -57,11 +57,12 @@ jobs:
       - run: yarn --frozen-lockfile
       - run: yarn build --if-present
       - run: ls -la
+
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.TEST_NETLIFY_SITE_ID }}
         with:
-          args: deploy --dir=./client/build
+          args: deploy --dir=client/build
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
