@@ -13,6 +13,12 @@ defaults:
     working-directory: client
 
 jobs:
+  build:
+    name: Greeting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo the greeting's time
+        run: echo '${{ cwd }}, ${{ runner.temp }}'
   test:
     name: Execute tests
     runs-on: ubuntu-latest
@@ -63,5 +69,5 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.TEST_NETLIFY_SITE_ID }}
         with:
-          args: deploy --dir=${{ github.workspace }}
+          args: deploy --dir=${{ cwd }}/build
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
