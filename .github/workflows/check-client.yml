@@ -1,29 +1,18 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Front-end
+name: Check client workflow
 
 on:
-  push:
-    branches: [master]
   pull_request:
-    branches: [master]
+    branches:
+      - master
 
 defaults:
   run:
     working-directory: client
 
 jobs:
-  build:
-    name: Create the build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - run: yarn --frozen-lockfile
-      - run: yarn build --if-present
   test:
     name: Execute tests
     runs-on: ubuntu-latest
@@ -54,3 +43,25 @@ jobs:
           node-version: 14
       - run: yarn --frozen-lockfile
       - run: yarn check:types
+  preview:
+    name: Create app preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+      - uses: actions/checkout@v2
+
+      - name: Create build
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: yarn --frozen-lockfile
+      - run: yarn build --if-present
+
+      - name: Deploy to netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.TEST_NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=build
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
