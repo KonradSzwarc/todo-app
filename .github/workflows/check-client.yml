@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo the greeting's time
+        uses: actions/checkout@v2
         run: echo '${{ cwd }}, ${{ runner.temp }}'
   test:
     name: Execute tests
