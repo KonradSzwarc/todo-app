@@ -56,7 +56,6 @@ jobs:
           node-version: 14
       - run: yarn --frozen-lockfile
       - run: yarn build --if-present
-      - run: ls -la
 
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
