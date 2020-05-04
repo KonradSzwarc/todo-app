@@ -32,3 +32,8 @@ jobs:
         with:
           args: deploy --dir=client/build --prod
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+      - name: Upload temporary path
+        uses: actions/upload-artifact@v1
+        with:
+          name: netlify-url
+          path: netlify-url.txt
