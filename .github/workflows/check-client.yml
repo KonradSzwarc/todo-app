@@ -68,10 +68,10 @@ jobs:
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
 
       - name: Crate preview URL file
-        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_URL }} > netlify.txt
+        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_URL }} > ./netlify.txt
 
       - name: Save preview URL
         uses: actions/upload-artifact@v2
         with:
           name: netlify_url
-          path: netlify.txt
+          path: ./netlify.txt
