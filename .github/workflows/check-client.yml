@@ -58,7 +58,7 @@ jobs:
       - run: yarn build --if-present
 
       - name: Deploy to netlify
-        id: netlify
+        id: netlify_preview
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -67,4 +67,10 @@ jobs:
           args: deploy --dir=client/build
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
       - name: Echo netlify preview URL
-        run: echo ${{ steps.netlify.outputs.NETLIFY_LIVE_URL }}
+        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_OUTPUT }}
+      - name: Echo netlify preview URL
+        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_URL }}
+      - name: Echo netlify preview URL
+        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_LOGS_URL }}
+      - name: Echo netlify preview URL
+        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_LIVE_URL }}
