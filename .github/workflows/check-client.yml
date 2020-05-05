@@ -66,11 +66,8 @@ jobs:
         with:
           args: deploy --dir=client/build
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
-      - name: Echo netlify preview URL
-        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_OUTPUT }}
-      - name: Echo netlify preview URL
-        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_URL }}
-      - name: Echo netlify preview URL
-        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_LOGS_URL }}
-      - name: Echo netlify preview URL
-        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_LIVE_URL }}
+      - name: Save preview URL
+        uses: actions/upload-artifact@v2
+        with:
+          name: netlify_url
+          path: ${{ steps.netlify_preview.outputs.NETLIFY_URL }}
