@@ -13,60 +13,33 @@ defaults:
     working-directory: client
 
 jobs:
-  # test:
-  #   name: Execute tests
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 14
-  #     - run: yarn --frozen-lockfile
-  #     - run: yarn test
-  # lint:
-  #   name: Run ESLint
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 14
-  #     - run: yarn --frozen-lockfile
-  #     - run: yarn check:lint
-  # typecheck:
-  #   name: Check types
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 14
-  #     - run: yarn --frozen-lockfile
-  #     - run: yarn check:types
-  preview:
-    name: Create app preview
+  test:
+    name: Execute tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Create build
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
           node-version: 14
       - run: yarn --frozen-lockfile
-      - run: yarn build --if-present
-
-      - name: Deploy to netlify
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.TEST_NETLIFY_SITE_ID }}
+      - run: yarn test
+  lint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          args: deploy --dir=client/build
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
-      - name: Upload temporary path
-        uses: actions/upload-artifact@v1
+          node-version: 14
+      - run: yarn --frozen-lockfile
+      - run: yarn check:lint
+  typecheck:
+    name: Check types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          name: netlify-url
-          path: netlify-url.txt
+          node-version: 14
+      - run: yarn --frozen-lockfile
+      - run: yarn check:types
