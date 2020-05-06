@@ -30,9 +30,9 @@
     "build": "craco build",
     "test": "craco test",
     "svg": "npx @svgr/cli --ext tsx --no-dimensions -d src/components/svg src/assets/svg",
-    "lint": "eslint \"*/**/*.{js,ts,tsx}\" --fix",
-    "typecheck": "tsc --noEmit",
-    "check-all": "npm-run-all --parallel --continue-on-error lint typescript",
+    "check:lint": "eslint \"*/**/*.{js,ts,tsx}\" --fix",
+    "check:types": "tsc --noEmit",
+    "check-all": "npm-run-all --parallel --continue-on-error check:lint check:types",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },

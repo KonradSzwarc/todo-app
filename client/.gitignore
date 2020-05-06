@@ -10,6 +10,7 @@
 
 # production
 /build
+/storybook-static
 
 # env
 .env
@@ -24,6 +25,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-#generated
-generated
