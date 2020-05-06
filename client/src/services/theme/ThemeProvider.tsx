@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from 'react-use';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming';
 import { plPL, enUS } from '@material-ui/core/locale';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
@@ -38,7 +39,11 @@ export const PureThemeProvider: FC<ThemeProviderProps> = memo(
     const themeObject = themes[themeKey];
     const muiTheme = createMuiTheme(themeObject, languageObject) as Theme;
 
-    return <MuiThemeProvider theme={muiTheme}>{children}</MuiThemeProvider>;
+    return (
+      <MuiThemeProvider theme={muiTheme}>
+        <EmotionThemeProvider theme={muiTheme}>{children}</EmotionThemeProvider>
+      </MuiThemeProvider>
+    );
   },
   (prevProps, nextProps) =>
     prevProps.language === nextProps.language && (prevProps.theme === nextProps.theme || !nextProps.theme),
