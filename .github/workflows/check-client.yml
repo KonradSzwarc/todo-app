@@ -55,23 +55,37 @@ jobs:
         with:
           node-version: 14
       - run: yarn --frozen-lockfile
-      - run: yarn build --if-present
+      - run: yarn build
 
       - name: Deploy to netlify
         id: netlify_preview
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.TEST_NETLIFY_SITE_ID }}
+          NETLIFY_SITE_ID: ${{ secrets.PROD_NETLIFY_SITE_ID }}
         with:
           args: deploy --dir=client/build
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
 
-      - name: Crate preview URL file
-        run: echo ${{ steps.netlify_preview.outputs.NETLIFY_URL }} > ./netlify.txt
-
-      - name: Save preview URL
-        uses: actions/upload-artifact@v2
+      - name: Create storybook build
+        uses: actions/setup-node@v1
         with:
-          name: netlify_url
-          path: ./client/netlify.txt
+          node-version: 14
+      - run: yarn --frozen-lockfile
+      - run: yarn build-storybook
+
+      - name: Deploy storybook
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.PROD_NETLIFY_STORYBOOK_SITE_ID }}
+        with:
+          args: deploy --dir=client/storybook-static
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+      # - name: Crate preview URL file
+      #   run: echo ${{ steps.netlify_preview.outputs.NETLIFY_URL }} > ./netlify.txt
+      # - name: Save preview URL
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: netlify_url
+      #     path: ./client/netlify.txt
