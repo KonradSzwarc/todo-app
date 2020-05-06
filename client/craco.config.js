@@ -1,5 +1,6 @@
 const path = require('path');
 const CracoAlias = require('craco-alias');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   plugins: [
@@ -12,6 +13,15 @@ module.exports = {
       },
     },
   ],
+  webpack: {
+    plugins: [
+      new BundleAnalyzerPlugin({
+        openAnalyzer: false,
+        analyzerPort: 8888,
+        defaultSizes: 'gzip',
+      }),
+    ],
+  },
   eslint: {
     enable: false,
   },
@@ -20,6 +30,7 @@ module.exports = {
   },
   babel: {
     plugins: [
+      '@loadable/babel-plugin',
       [
         'babel-plugin-import',
         {

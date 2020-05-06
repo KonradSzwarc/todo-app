@@ -4,12 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "generate-api-client": "ts-node src/api-client/index.ts && yarn format-generated",
+    "api-client": "ts-node src/api-client/index.ts && yarn format-generated",
+    "translations": "ts-node src/translations.ts && yarn format-generated",
     "format-generated": "prettier --write \"../client/src/generated/*.ts\"",
     "test": "jest"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^9.0.1",
+    "@loadable/component": "^5.12.0",
     "@types/lodash": "^4.14.150",
     "del": "^5.1.0",
     "lodash": "^4.17.15",
@@ -20,6 +22,7 @@
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
+    "@types/loadable__component": "^5.10.0",
     "@types/node": "^13.13.0",
     "jest": "^25.4.0",
     "prettier": "^2.0.4",

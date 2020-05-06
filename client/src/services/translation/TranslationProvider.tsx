@@ -6,11 +6,10 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { useCurrentUserState } from '@store/currentUser';
 import { useEffectOnce } from 'react-use';
-import { Language } from '@generated/api';
 import { FC } from '@typings/components';
 
 export type TranslationProviderProps = {
-  language?: Language;
+  language?: 'pl' | 'en';
 };
 
 const useKeySequence = (sequence: string, callback: () => void) => {
@@ -37,7 +36,7 @@ export const PureTranslationProvider: FC<TranslationProviderProps> = memo(
     const initialized = useRef(false);
 
     useKeySequence('langg', () => {
-      const newLang = i18n.language === Language.PL ? Language.EN : Language.PL;
+      const newLang = i18n.language === 'pl' ? 'en' : 'pl';
 
       i18n.loadLanguages(newLang, () => {
         i18n.changeLanguage(newLang);
@@ -50,7 +49,7 @@ export const PureTranslationProvider: FC<TranslationProviderProps> = memo(
       if (process.env.NODE_ENV === 'test') {
         i18n.init({
           lng: language,
-          fallbackLng: Language.EN,
+          fallbackLng: 'en',
           resources: {
             en: {},
             pl: {},
@@ -63,9 +62,9 @@ export const PureTranslationProvider: FC<TranslationProviderProps> = memo(
           .use(LanguageDetector)
           .init({
             lng: language,
-            fallbackLng: Language.EN,
+            fallbackLng: 'en',
             load: 'languageOnly',
-            whitelist: Object.values(Language),
+            whitelist: ['en', 'pl'],
             defaultNS: 'translation',
             interpolation: { escapeValue: false },
           });

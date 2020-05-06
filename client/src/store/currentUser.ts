@@ -10,9 +10,8 @@ import {
   User,
 } from '@generated/api';
 
-import { useDispatch } from '@hooks/useDispatch';
 import { useSelector } from '@hooks/useSelector';
-import { createAsyncState } from './utils';
+import { createAsyncState, useDispatcher } from './utils';
 
 const currentUserSlice = createSlice({
   name: 'currentUser',
@@ -93,12 +92,12 @@ export function* currentUserSagaWatcher() {
 }
 
 export const useCurrentUserActions = () => {
-  const dispatch = useDispatch();
+  const dispatcher = useDispatcher();
 
   return {
-    fetchCurrentUser: () => dispatch(actions.fetchCurrentUserRequest()),
-    signIn: (payload: SignInBody) => dispatch(actions.signInRequest(payload)),
-    signOut: () => dispatch(actions.signOutRequest()),
+    fetchCurrentUser: dispatcher(actions.fetchCurrentUserRequest),
+    signIn: dispatcher(actions.signInRequest),
+    signOut: dispatcher(actions.signOutRequest),
   };
 };
 

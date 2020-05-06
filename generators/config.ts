@@ -6,4 +6,9 @@ export const config = {
     fileName: 'api.ts',
     apiClientPath: '@utils/apiClient',
   },
+  translations: {
+    translationsDir: resolve(__dirname, '../client/public/locales/en'),
+    translationsTypeFileName: 'translations.ts',
+    translationKeysFileName: 'translationKeys.ts',
+  },
 };
