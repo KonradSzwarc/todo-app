@@ -25,9 +25,6 @@ module.exports = {
   eslint: {
     enable: false,
   },
-  typescript: {
-    enableTypeChecking: false,
-  },
   babel: {
     plugins: [
       '@loadable/babel-plugin',

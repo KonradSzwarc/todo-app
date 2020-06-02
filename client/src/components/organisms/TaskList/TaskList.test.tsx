@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@utils/testing';
+import { render } from '@utils/test';
 import { WithPinnedTasks, Loading, Empty, Default } from './TaskList.stories';
 
 describe('TaskList', () => {

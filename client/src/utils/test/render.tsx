@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { queries, Queries } from '@testing-library/dom';

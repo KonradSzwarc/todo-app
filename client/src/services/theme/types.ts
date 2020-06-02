@@ -3,6 +3,9 @@ import { SpacingProps as SystemSpacingProps, SizingProps as SystemSizingProps } 
 import { Theme as MuiTheme, ThemeOptions as MuiThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import { PaletteOptions } from '@material-ui/core/styles/createPalette';
 
+// eslint-disable-next-line import/no-cycle
+import { themes } from './themes';
+
 type Palette = PaletteOptions & {};
 
 export type ThemeObject = MuiThemeOptions & {
@@ -10,6 +13,8 @@ export type ThemeObject = MuiThemeOptions & {
 };
 
 export type Theme = MuiTheme & {};
+
+export type ThemeKey = keyof typeof themes;
 
 export type BreakpointKey = Theme['breakpoints']['keys'][0];
 

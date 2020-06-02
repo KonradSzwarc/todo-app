@@ -30,7 +30,7 @@ module.exports = {
     'no-console': 0,
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: ['**/*.test.tsx', '**/*.stories.tsx', 'craco.config.js'] },
+      { devDependencies: ['**/*.test.tsx', '**/*.stories.tsx', 'craco.config.js', '**/test/*'] },
     ],
     'spaced-comment': [2, 'always', { markers: ['/'] }],
     'react/jsx-filename-extension': [2, { extensions: ['.ts', '.tsx'] }],
@@ -61,6 +61,12 @@ module.exports = {
       files: ['**/store/*.ts'],
       rules: {
         'no-param-reassign': 0,
+      },
+    },
+    {
+      files: ['**/*.translations.ts'],
+      rules: {
+        '@typescript-eslint/camelcase': 0,
       },
     },
     {

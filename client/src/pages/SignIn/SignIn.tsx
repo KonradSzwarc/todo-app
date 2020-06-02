@@ -5,9 +5,9 @@ import { Form } from '@components/formik/Form';
 import { TextField } from '@components/formik/TextField';
 import { SubmitButton } from '@components/formik/SubmitButton';
 import { useValidation } from '@services/validation/useValidation';
-import { useTranslation } from '@services/translation';
 import { YupSchema } from '@services/validation';
 import { Box } from '@components/atoms/Box';
+import { useSignInTranslations } from './SignIn.translations';
 
 type FormValues = {
   email: string;
@@ -15,14 +15,14 @@ type FormValues = {
 };
 
 const SignInComponent = () => {
-  const { t } = useTranslation('sign-in');
+  const { t } = useSignInTranslations();
 
   return (
     <Box width="100vw" height="calc(100vh - 64px)" display="flex" justifyContent="center" alignItems="center">
       <Form display="flex" flexDirection="column">
-        <TextField name="email" label={t('email_label')} autoFocus />
-        <TextField name="password" label={t('password_label')} />
-        <SubmitButton>{t('submit_text')}</SubmitButton>
+        <TextField name="email" label={t('emailLabel')} autoFocus />
+        <TextField name="password" label={t('passwordLabel')} />
+        <SubmitButton>{t('submitText')}</SubmitButton>
       </Form>
     </Box>
   );
@@ -56,4 +56,6 @@ const SignInContainer = () => {
   );
 };
 
-export default SignInContainer;
+const SignIn = SignInContainer;
+
+export default SignIn;

@@ -1,18 +1,16 @@
 import React, { createContext } from 'react';
 import * as yup from 'yup';
 import { FC } from '@typings/components';
-import { Translations } from '@generated/translations';
-import { useTranslation } from '../translation';
+import { useValidationTranslations } from './validation.translations';
 
 export const ValidationContext = createContext({ yup });
 
 export const ValidationProvider: FC = ({ children }) => {
-  const { t } = useTranslation('validation');
+  const { t } = useValidationTranslations();
 
-  const getMessage = (ruleName: Translations['validation'], count?: number) => (
+  const getMessage = (ruleName: Parameters<typeof t>[0], count?: number) => (
     params: Partial<yup.TestMessageParams>,
   ): string => {
-    console.log(params.label, t('this_field'));
     return t(ruleName, { count }).replace('$path', params.label || t('this_field'));
   };
 

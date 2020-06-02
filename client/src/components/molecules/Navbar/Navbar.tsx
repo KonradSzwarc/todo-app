@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Toolbar, IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -7,14 +8,8 @@ import { makeStyles } from '@services/theme';
 import { Button } from '@components/atoms/Button';
 import { useCurrentUserActions, useCurrentUserState } from '@store/currentUser';
 import { Box } from '@components/atoms/Box';
-import { useRedirect } from '@routes/useRedirect';
-
-type NavbarComponentProps = {};
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -25,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Navbar = () => {
   const classes = useStyles();
-  const { createRedirect } = useRedirect();
+  const history = useHistory();
   const currentUser = useCurrentUserState();
   const { signIn, signOut } = useCurrentUserActions();
 
@@ -43,10 +38,8 @@ export const Navbar = () => {
           <Typography variant="h6" className={classes.title}>
             Todo App
           </Typography>
-          <Button onClick={createRedirect('/')}>Home</Button>
-          <Button onClick={createRedirect('/about/:id', { id: Math.round(Math.random() * 20) })}>About</Button>
-          <Button onClick={createRedirect('/contact')}>Contact</Button>
-          <Button onClick={createRedirect('/sign-in')}>Sign in</Button>
+          <Button onClick={() => history.push('/')}>Home</Button>
+          <Button onClick={() => history.push('/sign-in')}>Sign in</Button>
           {(currentUser.status === 'success' || currentUser.status === 'failure') && (
             <>
               {currentUser.data ? (

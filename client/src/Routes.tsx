@@ -4,16 +4,15 @@ import { Switch, Route } from 'react-router-dom';
 import { Navbar } from '@components/molecules/Navbar';
 import { AuthGuard } from '@services/auth';
 import { App } from '@pages/app/App';
-import { routing } from './routes/routing';
+import Home from '@pages/Home';
+import SignIn from '@pages/SignIn';
 
 export const Routes = () => (
   <>
     <Navbar />
     <Switch>
-      <Route {...routing.home.route} />
-      <Route {...routing.about.route} />
-      <Route {...routing.signIn.route} />
-      <Route {...routing.contact.route} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/sign-in" component={SignIn} />
       <Route path="/app">
         <AuthGuard>
           <Route exact path="/app" component={App} />

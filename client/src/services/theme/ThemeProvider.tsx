@@ -1,24 +1,20 @@
 import React, { useEffect, memo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from 'react-use';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming';
-import { plPL, enUS } from '@material-ui/core/locale';
+import { plPL, enUS, Localization } from '@material-ui/core/locale';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 import { useCurrentUserState } from '@store/currentUser';
+import { Language, useI18n } from '@services/translation';
 import { FC } from '@typings/components';
 
-import { Theme } from './types';
-import { light, dark } from './themes';
+import { Theme, ThemeKey } from './types';
+import { themes } from './themes';
+import { DEFAULT_THEME } from './constants';
 
-const themes = { light, dark };
-const languages = { pl: plPL, en: enUS };
-
-type Language = keyof typeof languages;
-
-type ThemeKey = keyof typeof themes;
+const languages: Record<Language, Localization> = { pl: plPL, en: enUS };
 
 type ThemeProviderProps = {
   language: Language;
@@ -26,8 +22,8 @@ type ThemeProviderProps = {
 };
 
 export const PureThemeProvider: FC<ThemeProviderProps> = memo(
-  ({ children, language, theme }) => {
-    const [themeKey, setThemeKey] = useLocalStorage<ThemeKey>('muiTheme', theme || 'light');
+  ({ children, language, theme = DEFAULT_THEME }) => {
+    const [themeKey, setThemeKey] = useLocalStorage<ThemeKey>('muiTheme', theme);
 
     useEffect(() => {
       if (theme) {
@@ -51,18 +47,10 @@ export const PureThemeProvider: FC<ThemeProviderProps> = memo(
 
 export const ThemeProvider: FC = ({ children }) => {
   const currentUser = useCurrentUserState();
-  const { i18n } = useTranslation();
-
-  const language = i18n.languages[0] as Language;
-
-  if (!Object.keys(languages).includes(language)) {
-    throw new TypeError(
-      `Unsupported language "${language}". Supporded languages are: ${Object.keys(languages).join(', ')}`,
-    );
-  }
+  const { currentLanguage } = useI18n();
 
   return (
-    <PureThemeProvider language={language} theme={currentUser.data?.theme}>
+    <PureThemeProvider language={currentLanguage} theme={currentUser.data?.theme}>
       <CssBaseline />
       {children}
     </PureThemeProvider>
