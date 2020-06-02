@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, bindActionCreators } from '@reduxjs/toolkit';
 import { put, takeEvery } from 'redux-saga/effects';
 
 import {
@@ -9,9 +9,11 @@ import {
   signOutRequest,
   User,
 } from '@generated/api';
-
+import { useDispatch } from '@hooks/useDispatch';
 import { useSelector } from '@hooks/useSelector';
-import { createAsyncState, useDispatcher } from './utils';
+import { RootState } from '@typings/redux';
+
+import { createAsyncState } from './utils';
 
 const currentUserSlice = createSlice({
   name: 'currentUser',
@@ -92,15 +94,20 @@ export function* currentUserSagaWatcher() {
 }
 
 export const useCurrentUserActions = () => {
-  const dispatcher = useDispatcher();
+  const dispatch = useDispatch();
 
-  return {
-    fetchCurrentUser: dispatcher(actions.fetchCurrentUserRequest),
-    signIn: dispatcher(actions.signInRequest),
-    signOut: dispatcher(actions.signOutRequest),
-  };
+  return bindActionCreators(
+    {
+      fetchCurrentUser: actions.fetchCurrentUserRequest,
+      signIn: actions.signInRequest,
+      signOut: actions.signOutRequest,
+    },
+    dispatch,
+  );
 };
 
-export const useCurrentUserState = () => useSelector((state) => state.currentUser);
+export const currentUserSelector = (state: RootState) => state.currentUser;
+
+export const useCurrentUserState = () => useSelector(currentUserSelector);
 
 export default currentUserSlice.reducer;
