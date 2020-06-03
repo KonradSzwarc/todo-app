@@ -9,7 +9,7 @@ import { Theme } from './types';
 
 type JSXInEl = JSX.IntrinsicElements;
 
-type Options = StyledOptions & { omitKeys?: string[] };
+type Options = StyledOptions & { omitKeys?: string[]; preserveKeys?: string[] };
 
 interface CreateStyled<Theme extends object = any> {
   <Tag extends React.ComponentType<any>, ExtraProps = {}>(tag: Tag, options?: Options): CreateStyledComponentExtrinsic<
@@ -25,13 +25,14 @@ interface CreateStyled<Theme extends object = any> {
   >;
 }
 
-const shouldForwardProp = (omitKeys: string[] = []) => (prop: string) => !omitKeys.includes(prop);
+const shouldForwardProp = (omitKeys: string[] = [], preserveKeys: string[] = []) => (prop: string) =>
+  preserveKeys.includes(prop) || !omitKeys.includes(prop);
 
 export const styled: CreateStyled<Theme> = (
   tag: React.ComponentType<any> | keyof JSXInEl,
-  { omitKeys, ...options }: Options = {},
+  { omitKeys, preserveKeys, ...options }: Options = {},
 ) => {
-  const config = omitKeys ? { shouldForwardProp: shouldForwardProp(omitKeys), ...options } : options;
+  const config = omitKeys ? { shouldForwardProp: shouldForwardProp(omitKeys, preserveKeys), ...options } : options;
 
   return typeof tag === 'string' ? emotionStyled(tag, config) : emotionStyled(tag, config);
 };

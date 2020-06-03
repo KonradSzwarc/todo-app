@@ -1,45 +1,44 @@
 import React from 'react';
-import { useField, useFormikContext } from 'formik';
-import { TextField as PureTextField, TextFieldProps as PureTextFieldProps } from '@components/atoms/TextField';
+import { getIn, FieldProps } from 'formik';
+import { TextField, TextFieldProps } from '@components/atoms/TextField';
+import { FormikField, FormikFieldProps } from '../Field';
 
-export type TextFieldProps = PureTextFieldProps & {
-  name: string;
-};
+export type FormikTextFieldProps = FormikFieldProps & TextFieldProps;
 
-export const TextField = (props: TextFieldProps) => {
-  const { isSubmitting } = useFormikContext();
-  const [{ value, onChange, onBlur }, meta] = useField<string>(props.name);
+export const FormikTextField = React.forwardRef(
+  (
+    { name, validate, fast, onChange: $onChange, onBlur: $onBlur, ...restProps }: FormikTextFieldProps,
+    ref: React.Ref<HTMLDivElement>,
+  ) => (
+    <FormikField name={name} validate={validate} fast={fast}>
+      {({ field: { value, onChange, onBlur }, form: { touched, errors, isSubmitting } }: FieldProps) => {
+        const errorText = getIn(errors, name);
+        const error = getIn(touched, name) && Boolean(errorText);
+        const helperText = error ? errorText : restProps.helperText;
+        const disabled = restProps.disabled ?? isSubmitting;
 
-  const handleChange: TextFieldProps['onChange'] = (e) => {
-    if (props.onChange) {
-      props.onChange(e);
-    }
+        return (
+          <TextField
+            ref={ref}
+            name={name}
+            value={value}
+            error={error}
+            helperText={helperText}
+            disabled={disabled}
+            onChange={(event) => {
+              onChange(event);
+              if ($onChange) $onChange(event);
+            }}
+            onBlur={(event) => {
+              onBlur(event);
+              if ($onBlur) $onBlur(event);
+            }}
+            {...restProps}
+          />
+        );
+      }}
+    </FormikField>
+  ),
+);
 
-    onChange(e);
-  };
-
-  const handleBlur: TextFieldProps['onBlur'] = (e) => {
-    if (props.onBlur) {
-      props.onBlur(e);
-    }
-
-    onBlur(e);
-  };
-
-  const hasError = (!!meta.error && meta.touched) || props.error;
-  const helperText = hasError ? meta.error : props.helperText;
-  const disabled = isSubmitting || props.disabled;
-
-  return (
-    <PureTextField
-      {...props}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      value={value}
-      error={hasError}
-      helperText={helperText}
-      defaultValue={meta.initialValue}
-      disabled={disabled}
-    />
-  );
-};
+FormikTextField.displayName = 'FormikTextField';

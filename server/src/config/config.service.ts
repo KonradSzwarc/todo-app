@@ -29,6 +29,10 @@ type EnvConfig = {
   SENDGRID_KEY: string;
 };
 
+type ValidationResult = Omit<Joi.ValidationResult, 'value'> & {
+  value: EnvConfig;
+};
+
 @Injectable()
 export class ConfigService {
   constructor() {
@@ -67,7 +71,7 @@ export class ConfigService {
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(envConfig, {
       stripUnknown: true,
-    });
+    }) as ValidationResult;
 
     if (error) {
       throw new Error(`Config validation error: ${error.message}`);

@@ -16,8 +16,9 @@ module.exports = {
   },
   parserOptions: {
     ecmaVersion: 2020,
+    tsconfigRootDir: __dirname,
+    project: ['./tsconfig.json'],
     sourceType: 'module',
-    project: 'tsconfig.json',
     ecmaFeatures: {
       jsx: true,
     },
@@ -67,12 +68,6 @@ module.exports = {
       files: ['**/*.translations.ts'],
       rules: {
         '@typescript-eslint/camelcase': 0,
-      },
-    },
-    {
-      files: ['**/models/*.ts'],
-      rules: {
-        'import/no-cycle': 0,
       },
     },
     {

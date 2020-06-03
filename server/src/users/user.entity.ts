@@ -44,9 +44,6 @@ export class User {
   @ApiProperty({ enum: ThemeKey, enumName: 'ThemeKey', default: ThemeKey.LIGHT })
   theme: ThemeKey;
 
-  @OneToMany(
-    () => Task,
-    (task) => task.user,
-  )
+  @OneToMany(() => Task, (task) => task.user)
   tasks: Task[];
 }
