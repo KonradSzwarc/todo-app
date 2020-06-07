@@ -1,4 +1,4 @@
-import { ValidationMap, ReactElement, PropsWithChildren, Ref, ElementRef } from 'react';
+import { ElementRef, PropsWithChildren, ReactElement, Ref, ValidationMap } from 'react';
 
 type ChildlessFunctionComponent<P = {}, C = {}> = {
   (props: P, context?: C): ReactElement | null;

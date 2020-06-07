@@ -1,10 +1,11 @@
+import { Queries, queries } from '@testing-library/dom';
+import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { queries, Queries } from '@testing-library/dom';
-import { render, RenderOptions, RenderResult } from '@testing-library/react';
-import { FC } from '@typings/components';
-import { PureThemeProvider } from '@services/theme';
-import { PureTranslationProvider } from '@services/translation';
+
+import { PureThemeProvider } from '@/services/theme';
+import { PureTranslationProvider } from '@/services/translation';
+import { FC } from '@/typings/components';
 
 type ProvidersProps = {};
 

@@ -1,13 +1,14 @@
+import { display, flexbox, sizing, spacing, typography } from '@material-ui/system';
+
 import {
-  styled,
   composeSystem,
-  SpacingProps,
-  SizingProps,
-  TypographyProps,
   DisplayProps,
   FlexboxProps,
-} from '@services/theme';
-import { spacing, sizing, typography, flexbox, display } from '@material-ui/system';
+  SizingProps,
+  SpacingProps,
+  styled,
+  TypographyProps,
+} from '@/services/theme';
 
 const { system, systemKeys } = composeSystem(spacing, sizing, typography, flexbox, display);
 

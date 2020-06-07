@@ -1,17 +1,13 @@
-import { createSlice, PayloadAction, bindActionCreators } from '@reduxjs/toolkit';
+import { bindActionCreators, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { put, takeEvery } from 'redux-saga/effects';
 
-import {
-  queryCurrentUserRequest,
-  QueryCurrentUserResponse,
-  SignInBody,
-  signInRequest,
-  signOutRequest,
-  User,
-} from '@generated/api';
-import { useDispatch } from '@hooks/useDispatch';
-import { useSelector } from '@hooks/useSelector';
-import { RootState } from '@typings/redux';
+import { SignInBody, signInRequest } from '@/api/auth/signIn';
+import { signOutRequest } from '@/api/auth/signOut';
+import { queryCurrentUserRequest, QueryCurrentUserResponse } from '@/api/user/queryCurrentUser';
+import { useDispatch } from '@/hooks/useDispatch';
+import { useSelector } from '@/hooks/useSelector';
+import { User } from '@/models/User';
+import { RootState } from '@/typings/redux';
 
 import { createAsyncState } from './utils';
 

@@ -1,9 +1,9 @@
-import React from 'react';
 import MuiTypography, { TypographyProps as MuiTypographyProps, TypographyTypeMap } from '@material-ui/core/Typography';
-import { spacing, sizing } from '@material-ui/system';
+import { sizing, spacing } from '@material-ui/system';
+import React from 'react';
 
-import { composeSystem, styled, SpacingProps, SizingProps } from '@services/theme';
-import { WithMainRef } from '@typings/components';
+import { composeSystem, SizingProps, SpacingProps, styled } from '@/services/theme';
+import { WithMainRef } from '@/typings/components';
 
 export type TypographyProps<
   D extends React.ElementType = TypographyTypeMap['defaultComponent'],

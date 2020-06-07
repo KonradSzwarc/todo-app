@@ -1,7 +1,8 @@
 import i18n, { TOptionsBase } from 'i18next';
 import { useTranslation as i18nUseTranslation, UseTranslationOptions } from 'react-i18next';
-import { TranslationResources, DefaultLanguage, Language } from './types';
+
 import { DEFAULT_LANGUAGE } from './constants';
+import { DefaultLanguage, Language, TranslationResources } from './types';
 
 export const createTranslationsHook = <T extends TranslationResources>(name: string, translations: T) => {
   return (

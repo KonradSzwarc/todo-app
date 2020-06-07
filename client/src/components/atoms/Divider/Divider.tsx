@@ -1,9 +1,9 @@
-import React from 'react';
 import MuiDivider, { DividerProps as MuiDividerProps, DividerTypeMap } from '@material-ui/core/Divider';
-import { spacing, sizing } from '@material-ui/system';
+import { sizing, spacing } from '@material-ui/system';
+import React from 'react';
 
-import { composeSystem, styled, SpacingProps, SizingProps } from '@services/theme';
-import { WithMainRef } from '@typings/components';
+import { composeSystem, SizingProps, SpacingProps, styled } from '@/services/theme';
+import { WithMainRef } from '@/typings/components';
 
 export type DividerProps<D extends React.ElementType = DividerTypeMap['defaultComponent'], P = {}> = MuiDividerProps<
   D,

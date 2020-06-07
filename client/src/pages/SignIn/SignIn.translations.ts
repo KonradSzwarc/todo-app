@@ -1,4 +1,4 @@
-import { createTranslationsHook } from '@services/translation';
+import { createTranslationsHook } from '@/services/translation';
 
 const en = {
   emailLabel: 'E-mail',

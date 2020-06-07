@@ -1,14 +1,14 @@
-import React, { useEffect, memo, useRef } from 'react';
-import { useEffectOnce } from 'react-use';
 import i18n from 'i18next';
-import { I18nextProvider } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import React, { memo, useEffect, useRef } from 'react';
+import { I18nextProvider } from 'react-i18next';
+import { useEffectOnce } from 'react-use';
 
-import { useCurrentUserState } from '@store/currentUser';
-import { FC } from '@typings/components';
+import { useCurrentUserState } from '@/store/currentUser';
+import { FC } from '@/typings/components';
 
-import { Language } from './types';
 import { LANGUAGES } from './constants';
+import { Language } from './types';
 
 export type TranslationProviderProps = {
   language?: Language;

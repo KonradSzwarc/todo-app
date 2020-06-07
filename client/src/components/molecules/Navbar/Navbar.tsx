@@ -1,13 +1,13 @@
+import { IconButton, Toolbar, Typography } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Toolbar, IconButton, Typography } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 
-import { AppBar } from '@components/atoms/AppBar';
-import { makeStyles } from '@services/theme';
-import { Button } from '@components/atoms/Button';
-import { useCurrentUserActions, useCurrentUserState } from '@store/currentUser';
-import { Box } from '@components/atoms/Box';
+import { AppBar } from '@/components/atoms/AppBar';
+import { Box } from '@/components/atoms/Box';
+import { Button } from '@/components/atoms/Button';
+import { makeStyles } from '@/services/theme';
+import { useCurrentUserActions, useCurrentUserState } from '@/store/currentUser';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {

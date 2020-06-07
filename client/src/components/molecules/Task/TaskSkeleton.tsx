@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Box } from '@components/atoms/Box';
-import { Skeleton } from '@components/atoms/Skeleton';
-import { Paper } from '@components/atoms/Paper';
+import { Box } from '@/components/atoms/Box';
+import { Paper } from '@/components/atoms/Paper';
+import { Skeleton } from '@/components/atoms/Skeleton';
 
 export const TaskSkeleton = () => (
   <Paper data-testid="task-skeleton" px={3} py={1} display="flex" alignItems="center">

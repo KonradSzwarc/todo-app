@@ -1,4 +1,4 @@
-import { LANGUAGES, DEFAULT_LANGUAGE } from './constants';
+import { DEFAULT_LANGUAGE, LANGUAGES } from './constants';
 
 export type Language = keyof typeof LANGUAGES;
 

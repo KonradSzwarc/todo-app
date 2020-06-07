@@ -1,11 +1,11 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import { Navbar } from '@components/molecules/Navbar';
-import { AuthGuard } from '@services/auth';
-import { App } from '@pages/app/App';
-import Home from '@pages/Home';
-import SignIn from '@pages/SignIn';
+import { Navbar } from '@/components/molecules/Navbar';
+import { App } from '@/pages/app/App';
+import Home from '@/pages/Home';
+import SignIn from '@/pages/SignIn';
+import { AuthGuard } from '@/services/auth';
 
 export const Routes = () => (
   <>

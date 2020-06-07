@@ -1,9 +1,9 @@
-import React from 'react';
 import MuiAvatarGroup, { AvatarGroupProps as MuiAvatarGroupProps } from '@material-ui/lab/AvatarGroup';
-import { spacing, sizing } from '@material-ui/system';
+import { sizing, spacing } from '@material-ui/system';
+import React from 'react';
 
-import { composeSystem, styled, SpacingProps, SizingProps } from '@services/theme';
-import { WithMainRef } from '@typings/components';
+import { composeSystem, SizingProps, SpacingProps, styled } from '@/services/theme';
+import { WithMainRef } from '@/typings/components';
 
 export type AvatarGroupProps = MuiAvatarGroupProps & SpacingProps & SizingProps & WithMainRef;
 

@@ -1,18 +1,18 @@
-import React, { useEffect, memo } from 'react';
-import { useLocalStorage } from 'react-use';
 import { CssBaseline } from '@material-ui/core';
+import { enUS, Localization, plPL } from '@material-ui/core/locale';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming';
-import { plPL, enUS, Localization } from '@material-ui/core/locale';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming';
+import React, { memo, useEffect } from 'react';
+import { useLocalStorage } from 'react-use';
 
-import { useCurrentUserState } from '@store/currentUser';
-import { Language, useI18n } from '@services/translation';
-import { FC } from '@typings/components';
+import { Language, useI18n } from '@/services/translation';
+import { useCurrentUserState } from '@/store/currentUser';
+import { FC } from '@/typings/components';
 
-import { Theme, ThemeKey } from './types';
-import { themes } from './themes';
 import { DEFAULT_THEME } from './constants';
+import { themes } from './themes';
+import { Theme, ThemeKey } from './types';
 
 const languages: Record<Language, Localization> = { pl: plPL, en: enUS };
 
@@ -32,7 +32,8 @@ export const PureThemeProvider: FC<ThemeProviderProps> = memo(
     }, [theme, setThemeKey]);
 
     const languageObject = languages[language];
-    const themeObject = themes[themeKey];
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const themeObject = themes[themeKey!];
     const muiTheme = createMuiTheme(themeObject, languageObject) as Theme;
 
     return (

@@ -1,6 +1,7 @@
-import React from 'react';
-import { Button, ButtonProps } from '@components/atoms/Button';
 import { useFormikContext } from 'formik';
+import React from 'react';
+
+import { Button, ButtonProps } from '@/components/atoms/Button';
 
 export type FormikSubmitButtonProps = Omit<ButtonProps, 'type'>;
 

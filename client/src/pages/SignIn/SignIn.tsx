@@ -1,13 +1,13 @@
-import React from 'react';
 import { Formik, FormikConfig } from 'formik';
+import React from 'react';
 
-import { Form } from '@components/formik/Form';
-import { FormikTextField } from '@components/formik/TextField';
-import { FormikSubmitButton } from '@components/formik/SubmitButton';
-import { useValidation } from '@services/validation/useValidation';
-import { YupSchema } from '@services/validation';
-import { Box } from '@components/atoms/Box';
-import { useCurrentUserActions } from '@store/currentUser';
+import { Box } from '@/components/atoms/Box';
+import { Form } from '@/components/formik/Form';
+import { FormikSubmitButton } from '@/components/formik/SubmitButton';
+import { FormikTextField } from '@/components/formik/TextField';
+import { YupSchema } from '@/services/validation';
+import { useValidation } from '@/services/validation/useValidation';
+import { useCurrentUserActions } from '@/store/currentUser';
 
 import { useSignInTranslations } from './SignIn.translations';
 

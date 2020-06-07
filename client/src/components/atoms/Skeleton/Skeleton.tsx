@@ -1,9 +1,9 @@
-import React from 'react';
 import MuiSkeleton, { SkeletonProps as MuiSkeletonProps, SkeletonTypeMap } from '@material-ui/lab/Skeleton';
-import { spacing, sizing } from '@material-ui/system';
+import { sizing, spacing } from '@material-ui/system';
+import React from 'react';
 
-import { composeSystem, styled, SpacingProps, SizingProps } from '@services/theme';
-import { WithMainRef } from '@typings/components';
+import { composeSystem, SizingProps, SpacingProps, styled } from '@/services/theme';
+import { WithMainRef } from '@/typings/components';
 
 export type SkeletonProps<D extends React.ElementType = SkeletonTypeMap['defaultComponent'], P = {}> = MuiSkeletonProps<
   D,

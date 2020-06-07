@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { compose as muiCompose, StyleFunction } from '@material-ui/system';
+
 import { Theme } from './types';
 
 type ComposedArg<T> = T extends Array<(arg: infer P) => any> ? P : never;

@@ -1,9 +1,9 @@
-import React from 'react';
 import MuiPaper, { PaperProps as MuiPaperProps } from '@material-ui/core/Paper';
-import { spacing, sizing, flexbox, display } from '@material-ui/system';
+import { display, flexbox, sizing, spacing } from '@material-ui/system';
+import React from 'react';
 
-import { composeSystem, styled, SpacingProps, SizingProps, FlexboxProps, DisplayProps } from '@services/theme';
-import { WithMainRef } from '@typings/components';
+import { composeSystem, DisplayProps, FlexboxProps, SizingProps, SpacingProps, styled } from '@/services/theme';
+import { WithMainRef } from '@/typings/components';
 
 export type PaperProps = MuiPaperProps & SpacingProps & SizingProps & WithMainRef & FlexboxProps & DisplayProps;
 

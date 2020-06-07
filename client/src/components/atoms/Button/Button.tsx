@@ -1,9 +1,9 @@
-import React from 'react';
 import MuiButton, { ButtonProps as MuiButtonProps, ButtonTypeMap } from '@material-ui/core/Button';
-import { spacing, sizing } from '@material-ui/system';
+import { sizing, spacing } from '@material-ui/system';
+import React from 'react';
 
-import { composeSystem, styled, SpacingProps, SizingProps } from '@services/theme';
-import { WithMainRef } from '@typings/components';
+import { composeSystem, SizingProps, SpacingProps, styled } from '@/services/theme';
+import { WithMainRef } from '@/typings/components';
 
 export type ButtonProps<D extends React.ElementType = ButtonTypeMap['defaultComponent'], P = {}> = MuiButtonProps<
   D,

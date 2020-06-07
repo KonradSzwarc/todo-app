@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
 import emotionStyled, {
-  StyledOptions,
-  CreateStyledComponentExtrinsic,
   CreateStyledComponentBase,
+  CreateStyledComponentExtrinsic,
+  StyledOptions,
 } from '@emotion/styled';
+import React from 'react';
+
 import { Theme } from './types';
 
 type JSXInEl = JSX.IntrinsicElements;
@@ -34,5 +35,6 @@ export const styled: CreateStyled<Theme> = (
 ) => {
   const config = omitKeys ? { shouldForwardProp: shouldForwardProp(omitKeys, preserveKeys), ...options } : options;
 
+  // eslint-disable-next-line sonarjs/no-all-duplicated-branches
   return typeof tag === 'string' ? emotionStyled(tag, config) : emotionStyled(tag, config);
 };

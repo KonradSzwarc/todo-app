@@ -1,6 +1,8 @@
 import React, { createContext } from 'react';
 import * as yup from 'yup';
-import { FC } from '@typings/components';
+
+import { FC } from '@/typings/components';
+
 import { useValidationTranslations } from './validation.translations';
 
 export const ValidationContext = createContext({ yup });

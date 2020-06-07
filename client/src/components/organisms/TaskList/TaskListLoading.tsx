@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 
-import { Paper } from '@components/atoms/Paper';
-import { Divider } from '@components/atoms/Divider';
-import { TaskSkeleton } from '@components/molecules/Task';
+import { Divider } from '@/components/atoms/Divider';
+import { Paper } from '@/components/atoms/Paper';
+import { TaskSkeleton } from '@/components/molecules/Task';
 
 export const TaskListLoading = () => {
   return (

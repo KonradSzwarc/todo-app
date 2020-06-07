@@ -1,6 +1,8 @@
+import { FieldProps, getIn } from 'formik';
 import React from 'react';
-import { getIn, FieldProps } from 'formik';
-import { TextField, TextFieldProps } from '@components/atoms/TextField';
+
+import { TextField, TextFieldProps } from '@/components/atoms/TextField';
+
 import { FormikField, FormikFieldProps } from '../Field';
 
 export type FormikTextFieldProps = FormikFieldProps & TextFieldProps;

@@ -1,6 +1,7 @@
+import { FastField, Field, FieldValidator } from 'formik';
 import React from 'react';
-import { Field, FastField, FieldValidator } from 'formik';
-import { FC } from '@typings/components';
+
+import { FC } from '@/typings/components';
 
 export type FormikFieldProps = {
   name: string;

@@ -1,6 +1,7 @@
+import { display, flexbox, spacing } from '@material-ui/system';
 import { Form as FormikForm, FormikFormProps } from 'formik';
-import { styled, SpacingProps, DisplayProps, FlexboxProps, composeSystem } from '@services/theme';
-import { spacing, display, flexbox } from '@material-ui/system';
+
+import { composeSystem, DisplayProps, FlexboxProps, SpacingProps, styled } from '@/services/theme';
 
 export type FormProps = FormikFormProps & SpacingProps & DisplayProps & FlexboxProps;
 

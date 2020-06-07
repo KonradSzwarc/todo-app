@@ -1,9 +1,9 @@
-import React from 'react';
 import MuiBadge, { BadgeProps as MuiBadgeProps, BadgeTypeMap } from '@material-ui/core/Badge';
-import { spacing, sizing } from '@material-ui/system';
+import { sizing, spacing } from '@material-ui/system';
+import React from 'react';
 
-import { composeSystem, SizingProps, SpacingProps, styled } from '@services/theme';
-import { WithMainRef } from '@typings/components';
+import { composeSystem, SizingProps, SpacingProps, styled } from '@/services/theme';
+import { WithMainRef } from '@/typings/components';
 
 export type BadgeProps<D extends React.ElementType = BadgeTypeMap['defaultComponent'], P = {}> = MuiBadgeProps<D, P> &
   SpacingProps &

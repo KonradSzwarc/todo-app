@@ -1,7 +1,7 @@
-import * as CSS from 'csstype';
-import { SpacingProps as SystemSpacingProps, SizingProps as SystemSizingProps } from '@material-ui/system';
 import { Theme as MuiTheme, ThemeOptions as MuiThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import { PaletteOptions } from '@material-ui/core/styles/createPalette';
+import { SizingProps as SystemSizingProps, SpacingProps as SystemSpacingProps } from '@material-ui/system';
+import * as CSS from 'csstype';
 
 // eslint-disable-next-line import/no-cycle
 import { themes } from './themes';
