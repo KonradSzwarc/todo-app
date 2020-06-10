@@ -22,7 +22,9 @@ jobs:
         with:
           node-version: 14
       - run: yarn --frozen-lockfile
-      - run: yarn test
+      - run: yarn test --ci --silent
+        env:
+          SKIP_PREFLIGHT_CHECK: true
   lint:
     name: Run ESLint
     runs-on: ubuntu-latest
@@ -56,6 +58,8 @@ jobs:
           node-version: 14
       - run: yarn --frozen-lockfile
       - run: yarn build
+        env:
+          SKIP_PREFLIGHT_CHECK: true
       - run: yarn build-storybook
 
       - name: Deploy app to Netlify
