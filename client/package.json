@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "analyze": "webpack-bundle-analyzer build/stats.json",
     "build": "craco build",
     "build-storybook": "build-storybook -s public",
     "check-all": "npm-run-all --parallel --continue-on-error lint typecheck test",

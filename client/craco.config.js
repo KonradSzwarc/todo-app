@@ -14,13 +14,20 @@ module.exports = {
     },
   ],
   webpack: {
-    plugins: [
-      new BundleAnalyzerPlugin({
-        openAnalyzer: false,
-        analyzerPort: 8888,
-        defaultSizes: 'gzip',
-      }),
-    ],
+    plugins: [],
+    configure: (webpackConfig, { env }) => {
+      if (env === 'development') {
+        webpackConfig.plugins.push(new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'server' }));
+      }
+
+      if (env === 'production') {
+        webpackConfig.plugins.push(
+          new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'disabled', generateStatsFile: true }),
+        );
+      }
+
+      return webpackConfig;
+    },
   },
   eslint: {
     enable: false,
@@ -47,5 +54,10 @@ module.exports = {
         'icons',
       ],
     ],
+  },
+  jest: {
+    configure: {
+      clearMocks: true,
+    },
   },
 };
