@@ -1,53 +1,50 @@
 import { IconButton, Toolbar, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { AppBar } from '@/components/atoms/AppBar';
 import { Box } from '@/components/atoms/Box';
 import { Button } from '@/components/atoms/Button';
-import { makeStyles } from '@/services/theme';
+import { useHistory } from '@/hooks/useHistory';
+import { styled } from '@/services/theme';
 import { useCurrentUserActions, useCurrentUserState } from '@/store/currentUser';
 
-const useStyles = makeStyles((theme) => ({
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
+const MenuButton = styled(IconButton)(({ theme }) => ({
+  marginRight: theme.spacing(2),
 }));
 
-export const Navbar = () => {
-  const classes = useStyles();
-  const history = useHistory();
-  const currentUser = useCurrentUserState();
-  const { signIn, signOut } = useCurrentUserActions();
+const Title = styled(Typography)({
+  flexGrow: 1,
+});
 
-  const handleSignIn = () => signIn({ email: 'Hayden_Zemlak49@hotmail.com', password: '12345678' });
+export const Navbar = () => {
+  const { redirect } = useHistory();
+  const currentUser = useCurrentUserState();
+  const { signOut } = useCurrentUserActions();
 
   const handleSignOut = () => signOut();
+
+  const isUserLoaded = currentUser.status !== 'idle' && currentUser.status !== 'loading';
 
   return (
     <>
       <AppBar>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <MenuButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Todo App
-          </Typography>
-          <Button onClick={() => history.push('/')}>Home</Button>
-          <Button onClick={() => history.push('/sign-in')}>Sign in</Button>
-          {(currentUser.status === 'success' || currentUser.status === 'failure') && (
+          </MenuButton>
+          <Title variant="h6">Todo App</Title>
+          <Button onClick={redirect('/')} color="inherit">
+            Home
+          </Button>
+          {isUserLoaded && (
             <>
               {currentUser.data ? (
                 <Button onClick={handleSignOut} color="inherit">
                   Sign out
                 </Button>
               ) : (
-                <Button onClick={handleSignIn} color="inherit">
+                <Button onClick={redirect('/sign-in')} color="inherit">
                   Sign in
                 </Button>
               )}

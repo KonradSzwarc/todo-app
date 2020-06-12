@@ -1,6 +1,6 @@
 const path = require('path');
 const CracoAlias = require('craco-alias');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   plugins: [

@@ -5,7 +5,7 @@ import React from 'react';
 import { Checkbox } from '@/components/atoms/Checkbox';
 import { Paper } from '@/components/atoms/Paper';
 import { Typography } from '@/components/atoms/Typography';
-import { makeStyles } from '@/services/theme';
+import { styled } from '@/services/theme';
 
 export type TaskProps = {
   id: string;
@@ -16,24 +16,25 @@ export type TaskProps = {
   onDoneClick: (id: string, value: boolean) => void;
 };
 
-const useStyles = makeStyles((theme) => ({
-  activeStar: {
-    color: theme.palette.primary.main,
-  },
+const ActiveStarIcon = styled(StarIcon)(({ theme }) => ({
+  color: theme.palette.primary.main,
 }));
 
 export const Task = (props: TaskProps) => {
-  const classes = useStyles();
   const isDone = props.status === 'DONE';
+
+  const handlePinChange = (newValue: boolean) => () => props.onPinClick(props.id, newValue);
+
+  const handleCheckboxClick = () => props.onDoneClick(props.id, !isDone);
 
   return (
     <Paper data-testid={`task-${props.id}`} px={3} py={1} display="flex" alignItems="center">
-      <Checkbox checked={isDone} onClick={() => props.onDoneClick(props.id, !isDone)} />
+      <Checkbox checked={isDone} onClick={handleCheckboxClick} />
       <Typography mr="auto">{props.title}</Typography>
       {props.pinned ? (
-        <StarIcon className={classes.activeStar} onClick={() => props.onPinClick(props.id, false)} />
+        <ActiveStarIcon onClick={handlePinChange(false)} />
       ) : (
-        <StarBorderIcon onClick={() => props.onPinClick(props.id, true)} />
+        <StarBorderIcon onClick={handlePinChange(true)} />
       )}
     </Paper>
   );

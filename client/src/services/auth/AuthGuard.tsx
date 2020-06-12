@@ -13,11 +13,14 @@ type AuthGuardProps = {
 export const AuthGuardContext = createContext(true);
 
 export const PureAuthGuard: FC<AuthGuardProps> = ({ children, user }) => {
-  if (user.status === 'idle' || user.status === 'loading') {
+  const isUserLoaded = user.status !== 'idle' && user.status !== 'loading';
+  const doesUserExist = user.data;
+
+  if (isUserLoaded) {
     throw new Error('AuthGuard can be used only inside routes wrapped in the WaitForUser component');
   }
 
-  if (!user.data) {
+  if (!doesUserExist) {
     return <Redirect to="/" />;
   }
 
