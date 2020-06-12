@@ -35,6 +35,6 @@ export const styled: CreateStyled<Theme> = (
 ) => {
   const config = omitKeys ? { shouldForwardProp: shouldForwardProp(omitKeys, preserveKeys), ...options } : options;
 
-  // eslint-disable-next-line sonarjs/no-all-duplicated-branches
+  // eslint-disable-next-line
   return typeof tag === 'string' ? emotionStyled(tag, config) : emotionStyled(tag, config);
 };
