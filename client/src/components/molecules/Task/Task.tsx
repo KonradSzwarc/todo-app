@@ -1,11 +1,11 @@
-import React from 'react';
 import StarIcon from '@material-ui/icons/Star';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import React from 'react';
 
-import { makeStyles } from '@services/theme';
-import { Paper } from '@components/atoms/Paper';
-import { Checkbox } from '@components/atoms/Checkbox';
-import { Typography } from '@components/atoms/Typography';
+import { Checkbox } from '@/components/atoms/Checkbox';
+import { Paper } from '@/components/atoms/Paper';
+import { Typography } from '@/components/atoms/Typography';
+import { makeStyles } from '@/services/theme';
 
 export type TaskProps = {
   id: string;

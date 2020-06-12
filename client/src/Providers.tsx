@@ -1,25 +1,26 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import { TranslationProvider } from '@services/translation';
-import { ThemeProvider } from '@services/theme';
-import { WaitForUser } from '@services/auth';
-import { store } from '@store/store';
-import { FC } from '@typings/components';
+import { WaitForUser } from '@/services/auth';
+import { ThemeProvider } from '@/services/theme';
+import { TranslationProvider } from '@/services/translation';
+import { ValidationProvider } from '@/services/validation';
+import { store } from '@/store/store';
+import { FC } from '@/typings/components';
 
 export const Providers: FC = ({ children }) => {
   return (
-    <Suspense fallback={null}>
-      <BrowserRouter>
-        <Provider store={store}>
-          <WaitForUser>
-            <TranslationProvider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <WaitForUser>
+          <TranslationProvider>
+            <ValidationProvider>
               <ThemeProvider>{children}</ThemeProvider>
-            </TranslationProvider>
-          </WaitForUser>
-        </Provider>
-      </BrowserRouter>
-    </Suspense>
+            </ValidationProvider>
+          </TranslationProvider>
+        </WaitForUser>
+      </Provider>
+    </BrowserRouter>
   );
 };

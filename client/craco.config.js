@@ -1,5 +1,6 @@
 const path = require('path');
 const CracoAlias = require('craco-alias');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   plugins: [
@@ -12,14 +13,28 @@ module.exports = {
       },
     },
   ],
+  webpack: {
+    plugins: [],
+    configure: (webpackConfig, { env }) => {
+      if (env === 'development') {
+        webpackConfig.plugins.push(new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'server' }));
+      }
+
+      if (env === 'production') {
+        webpackConfig.plugins.push(
+          new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'disabled', generateStatsFile: true }),
+        );
+      }
+
+      return webpackConfig;
+    },
+  },
   eslint: {
     enable: false,
   },
-  typescript: {
-    enableTypeChecking: false,
-  },
   babel: {
     plugins: [
+      '@loadable/babel-plugin',
       [
         'babel-plugin-import',
         {
@@ -39,5 +54,10 @@ module.exports = {
         'icons',
       ],
     ],
+  },
+  jest: {
+    configure: {
+      clearMocks: true,
+    },
   },
 };

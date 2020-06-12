@@ -1,5 +1,7 @@
 import { useContext } from 'react';
-import { useCurrentUserState } from '@store/currentUser';
+
+import { useCurrentUserState } from '@/store/currentUser';
+
 import { AuthGuardContext } from './AuthGuard';
 
 export const useAuthorizedUser = () => {

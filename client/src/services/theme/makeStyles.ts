@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import makeMuiStyles from '@material-ui/styles/makeStyles';
 import { ClassNameMap, Styles, WithStylesOptions } from '@material-ui/styles/withStyles';
+
 import { Theme } from './types';
 
 export const makeStyles = <Props extends {} | undefined = undefined, ClassKey extends string = string>(

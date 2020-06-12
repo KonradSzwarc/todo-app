@@ -1,16 +1,18 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import { Navbar } from '@components/molecules/Navbar';
-import { AuthGuard } from '@services/auth';
-import { Home } from '@pages/Home';
-import { App } from '@pages/app/App';
+import { Navbar } from '@/components/molecules/Navbar';
+import { App } from '@/pages/app/App';
+import Home from '@/pages/Home';
+import SignIn from '@/pages/SignIn';
+import { AuthGuard } from '@/services/auth';
 
 export const Routes = () => (
   <>
     <Navbar />
     <Switch>
-      <Route path="/" exact component={Home} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/sign-in" component={SignIn} />
       <Route path="/app">
         <AuthGuard>
           <Route exact path="/app" component={App} />

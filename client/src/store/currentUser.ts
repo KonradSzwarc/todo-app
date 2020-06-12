@@ -1,17 +1,14 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { bindActionCreators, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { put, takeEvery } from 'redux-saga/effects';
 
-import {
-  queryCurrentUserRequest,
-  QueryCurrentUserResponse,
-  SignInBody,
-  signInRequest,
-  signOutRequest,
-  User,
-} from '@generated/api';
+import { SignInBody, signInRequest } from '@/api/auth/signIn';
+import { signOutRequest } from '@/api/auth/signOut';
+import { queryCurrentUserRequest, QueryCurrentUserResponse } from '@/api/user/queryCurrentUser';
+import { useDispatch } from '@/hooks/useDispatch';
+import { useSelector } from '@/hooks/useSelector';
+import { User } from '@/models/User';
+import { RootState } from '@/typings/redux';
 
-import { useDispatch } from '@hooks/useDispatch';
-import { useSelector } from '@hooks/useSelector';
 import { createAsyncState } from './utils';
 
 const currentUserSlice = createSlice({
@@ -95,13 +92,18 @@ export function* currentUserSagaWatcher() {
 export const useCurrentUserActions = () => {
   const dispatch = useDispatch();
 
-  return {
-    fetchCurrentUser: () => dispatch(actions.fetchCurrentUserRequest()),
-    signIn: (payload: SignInBody) => dispatch(actions.signInRequest(payload)),
-    signOut: () => dispatch(actions.signOutRequest()),
-  };
+  return bindActionCreators(
+    {
+      fetchCurrentUser: actions.fetchCurrentUserRequest,
+      signIn: actions.signInRequest,
+      signOut: actions.signOutRequest,
+    },
+    dispatch,
+  );
 };
 
-export const useCurrentUserState = () => useSelector((state) => state.currentUser);
+export const currentUserSelector = (state: RootState) => state.currentUser;
+
+export const useCurrentUserState = () => useSelector(currentUserSelector);
 
 export default currentUserSlice.reducer;

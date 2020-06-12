@@ -1,5 +1,5 @@
-import React from 'react';
 import MailIcon from '@material-ui/icons/Mail';
+import React from 'react';
 
 import { Badge } from './Badge';
 

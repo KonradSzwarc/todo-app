@@ -1,9 +1,10 @@
 import React from 'react';
-import { AsyncState } from '@store/utils';
-import { User } from '@generated/api';
-import { FC } from '@typings/components';
 import { useEffectOnce, usePrevious } from 'react-use';
-import { useCurrentUserState, useCurrentUserActions } from '@store/currentUser';
+
+import { User } from '@/models/User';
+import { useCurrentUserActions, useCurrentUserState } from '@/store/currentUser';
+import { AsyncState } from '@/store/utils';
+import { FC } from '@/typings/components';
 
 export type WaitForUserProps = {
   user: AsyncState<User | null>;

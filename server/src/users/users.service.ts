@@ -20,6 +20,10 @@ export class UsersService {
     return this.userRepository.findById(userId);
   }
 
+  findOneByEmail(email: string) {
+    return this.userRepository.findByEmail(email);
+  }
+
   findOneOrFail(userId: string) {
     return this.userRepository.findByIdOrFail(userId);
   }

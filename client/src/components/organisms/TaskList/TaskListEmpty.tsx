@@ -1,9 +1,9 @@
-import React from 'react';
 import InboxIcon from '@material-ui/icons/Inbox';
+import React from 'react';
 
-import { makeStyles } from '@services/theme';
-import { Paper } from '@components/atoms/Paper';
-import { Typography } from '@components/atoms/Typography';
+import { Paper } from '@/components/atoms/Paper';
+import { Typography } from '@/components/atoms/Typography';
+import { makeStyles } from '@/services/theme';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

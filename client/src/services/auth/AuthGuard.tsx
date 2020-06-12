@@ -1,10 +1,10 @@
 import React, { createContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { useCurrentUserState } from '@store/currentUser';
-import { AsyncState } from '@store/utils';
-import { User } from '@generated/api';
-import { FC } from '@typings/components';
+import { User } from '@/models/User';
+import { useCurrentUserState } from '@/store/currentUser';
+import { AsyncState } from '@/store/utils';
+import { FC } from '@/typings/components';
 
 type AuthGuardProps = {
   user: AsyncState<User | null>;

@@ -1,10 +1,9 @@
-import React from 'react';
 import MuiTypography, { TypographyProps as MuiTypographyProps, TypographyTypeMap } from '@material-ui/core/Typography';
-import { spacing, SpacingProps, sizing, SizingProps } from '@material-ui/system';
+import { sizing, spacing } from '@material-ui/system';
+import React from 'react';
 
-import { makeStyles, composeSystem } from '@services/theme';
-import { WithMainRef } from '@typings/components';
-import { omitProps } from '@utils/omitProps';
+import { composeSystem, SizingProps, SpacingProps, styled } from '@/services/theme';
+import { WithMainRef } from '@/typings/components';
 
 export type TypographyProps<
   D extends React.ElementType = TypographyTypeMap['defaultComponent'],
@@ -13,15 +12,11 @@ export type TypographyProps<
 
 const { system, systemKeys } = composeSystem(spacing, sizing);
 
-const useStyles = makeStyles<TypographyProps>((theme) => ({
-  root: (props) => system({ theme, ...props }),
-}));
+const StyledTypography = styled(MuiTypography, { omitKeys: systemKeys })<TypographyProps>(system);
 
 export const Typography = <D extends React.ElementType = TypographyTypeMap['defaultComponent']>({
   mainRef,
   ...props
 }: TypographyProps<D, { component?: D }>) => {
-  const classes = useStyles(omitProps(systemKeys, props));
-
-  return <MuiTypography {...props} classes={classes} ref={mainRef} />;
+  return <StyledTypography {...props} ref={mainRef} />;
 };

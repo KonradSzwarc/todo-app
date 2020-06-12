@@ -1,6 +1,10 @@
 import React from 'react';
-import { render } from '@utils/testing';
-import { WithPinnedTasks, Loading, Empty, Default } from './TaskList.stories';
+
+import { render } from '@/utils/test';
+
+import { Default, Empty, Loading, WithPinnedTasks } from './TaskList.stories';
+
+jest.mock('@material-ui/icons/Inbox', () => () => '123');
 
 describe('TaskList', () => {
   it('renders tasks list without crash', () => {

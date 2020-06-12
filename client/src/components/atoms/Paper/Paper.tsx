@@ -1,32 +1,18 @@
-import React from 'react';
 import MuiPaper, { PaperProps as MuiPaperProps } from '@material-ui/core/Paper';
-import {
-  spacing,
-  SpacingProps,
-  sizing,
-  SizingProps,
-  flexbox,
-  FlexboxProps,
-  display,
-  DisplayProps,
-} from '@material-ui/system';
+import { display, flexbox, sizing, spacing } from '@material-ui/system';
+import React from 'react';
 
-import { makeStyles, composeSystem } from '@services/theme';
-import { WithMainRef } from '@typings/components';
-import { omitProps } from '@utils/omitProps';
+import { composeSystem, DisplayProps, FlexboxProps, SizingProps, SpacingProps, styled } from '@/services/theme';
+import { WithMainRef } from '@/typings/components';
 
 export type PaperProps = MuiPaperProps & SpacingProps & SizingProps & WithMainRef & FlexboxProps & DisplayProps;
 
 const { system, systemKeys } = composeSystem(spacing, sizing, flexbox, display);
 
-const useStyles = makeStyles<PaperProps>((theme) => ({
-  root: (props) => system({ theme, ...props }),
-}));
+const StyledPaper = styled(MuiPaper, { omitKeys: systemKeys })<PaperProps>(system);
 
 export const Paper = ({ mainRef, ...props }: PaperProps) => {
-  const classes = useStyles(omitProps(systemKeys, props));
-
-  return <MuiPaper {...props} classes={classes} ref={mainRef} />;
+  return <StyledPaper {...props} ref={mainRef} />;
 };
 
 Paper.defaultProps = {

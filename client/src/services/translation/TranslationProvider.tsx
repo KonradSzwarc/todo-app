@@ -1,13 +1,14 @@
-import React, { useEffect, memo, useRef } from 'react';
 import i18n from 'i18next';
-import XHR from 'i18next-xhr-backend';
-import { I18nextProvider } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-
-import { useCurrentUserState } from '@store/currentUser';
+import React, { memo, useEffect, useRef } from 'react';
+import { I18nextProvider } from 'react-i18next';
 import { useEffectOnce } from 'react-use';
-import { Language } from '@generated/api';
-import { FC } from '@typings/components';
+
+import { useCurrentUserState } from '@/store/currentUser';
+import { FC } from '@/typings/components';
+
+import { LANGUAGES } from './constants';
+import { Language } from './types';
 
 export type TranslationProviderProps = {
   language?: Language;
@@ -33,11 +34,11 @@ const useKeySequence = (sequence: string, callback: () => void) => {
 };
 
 export const PureTranslationProvider: FC<TranslationProviderProps> = memo(
-  ({ children, language = 'en' }) => {
+  ({ children, language = LANGUAGES.en }) => {
     const initialized = useRef(false);
 
     useKeySequence('langg', () => {
-      const newLang = i18n.language === Language.PL ? Language.EN : Language.PL;
+      const newLang = i18n.language === LANGUAGES.pl ? LANGUAGES.en : LANGUAGES.pl;
 
       i18n.loadLanguages(newLang, () => {
         i18n.changeLanguage(newLang);
@@ -47,29 +48,17 @@ export const PureTranslationProvider: FC<TranslationProviderProps> = memo(
     if (!initialized.current) {
       initialized.current = true;
 
-      if (process.env.NODE_ENV === 'test') {
-        i18n.init({
-          lng: language,
-          fallbackLng: Language.EN,
-          resources: {
-            en: {},
-            pl: {},
-          },
-          interpolation: { escapeValue: false },
-        });
-      } else {
-        i18n
-          .use(XHR)
-          .use(LanguageDetector)
-          .init({
-            lng: language,
-            fallbackLng: Language.EN,
-            load: 'languageOnly',
-            whitelist: Object.values(Language),
-            defaultNS: 'translation',
-            interpolation: { escapeValue: false },
-          });
-      }
+      i18n.use(LanguageDetector).init({
+        lng: language,
+        fallbackLng: LANGUAGES.en,
+        load: 'languageOnly',
+        whitelist: Object.keys(LANGUAGES),
+        interpolation: { escapeValue: false },
+        resources: {
+          en: {},
+          pl: {},
+        },
+      });
     }
 
     useEffect(() => {

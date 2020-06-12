@@ -1,10 +1,9 @@
-import React from 'react';
 import MuiBadge, { BadgeProps as MuiBadgeProps, BadgeTypeMap } from '@material-ui/core/Badge';
-import { spacing, SpacingProps, sizing, SizingProps } from '@material-ui/system';
+import { sizing, spacing } from '@material-ui/system';
+import React from 'react';
 
-import { makeStyles, composeSystem } from '@services/theme';
-import { WithMainRef } from '@typings/components';
-import { omitProps } from '@utils/omitProps';
+import { composeSystem, SizingProps, SpacingProps, styled } from '@/services/theme';
+import { WithMainRef } from '@/typings/components';
 
 export type BadgeProps<D extends React.ElementType = BadgeTypeMap['defaultComponent'], P = {}> = MuiBadgeProps<D, P> &
   SpacingProps &
@@ -13,20 +12,16 @@ export type BadgeProps<D extends React.ElementType = BadgeTypeMap['defaultCompon
 
 const { system, systemKeys } = composeSystem(spacing, sizing);
 
-const useStyles = makeStyles<Omit<BadgeProps, 'children'>>((theme) => ({
-  root: (props) => system({ theme, ...props }),
-}));
+const StyledBadge = styled(MuiBadge, { omitKeys: systemKeys })<Omit<BadgeProps, 'children'>>(system);
 
 export const Badge = <D extends React.ElementType = BadgeTypeMap['defaultComponent']>({
   children,
   mainRef,
   ...props
 }: BadgeProps<D, { component?: D }>) => {
-  const classes = useStyles(omitProps(systemKeys, props));
-
   return (
-    <MuiBadge {...props} classes={classes} ref={mainRef}>
+    <StyledBadge {...props} ref={mainRef}>
       {children}
-    </MuiBadge>
+    </StyledBadge>
   );
 };

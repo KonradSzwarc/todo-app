@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 
-import { Paper } from '@components/atoms/Paper';
-import { Divider } from '@components/atoms/Divider';
-import { Task, TaskProps } from '@components/molecules/Task';
+import { Divider } from '@/components/atoms/Divider';
+import { Paper } from '@/components/atoms/Paper';
+import { Task, TaskProps } from '@/components/molecules/Task';
 
-import { TaskListLoading } from './TaskListLoading';
 import { TaskListEmpty } from './TaskListEmpty';
+import { TaskListLoading } from './TaskListLoading';
 
 type TaskMethods = 'onPinClick' | 'onDoneClick';
 
