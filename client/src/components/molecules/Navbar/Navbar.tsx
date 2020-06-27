@@ -6,8 +6,15 @@ import { AppBar } from '@/components/atoms/AppBar';
 import { Box } from '@/components/atoms/Box';
 import { Button } from '@/components/atoms/Button';
 import { useHistory } from '@/hooks/useHistory';
+import { useUserAuthorization } from '@/services/auth';
 import { styled } from '@/services/theme';
-import { useCurrentUserActions, useCurrentUserState } from '@/store/currentUser';
+import { useCurrentUserActions } from '@/store/currentUser';
+
+type NavbarComponentProps = {
+  redirect: (path: string) => () => void;
+  authorized: boolean;
+  signOut: () => void;
+};
 
 const MenuButton = styled(IconButton)(({ theme }) => ({
   marginRight: theme.spacing(2),
@@ -17,15 +24,7 @@ const Title = styled(Typography)({
   flexGrow: 1,
 });
 
-export const Navbar = () => {
-  const { redirect } = useHistory();
-  const currentUser = useCurrentUserState();
-  const { signOut } = useCurrentUserActions();
-
-  const handleSignOut = () => signOut();
-
-  const isUserLoaded = currentUser.status !== 'idle' && currentUser.status !== 'loading';
-
+export const NavbarComponent = ({ redirect, authorized, signOut }: NavbarComponentProps) => {
   return (
     <>
       <AppBar>
@@ -37,22 +36,31 @@ export const Navbar = () => {
           <Button onClick={redirect('/')} color="inherit">
             Home
           </Button>
-          {isUserLoaded && (
+          {authorized ? (
             <>
-              {currentUser.data ? (
-                <Button onClick={handleSignOut} color="inherit">
-                  Sign out
-                </Button>
-              ) : (
-                <Button onClick={redirect('/sign-in')} color="inherit">
-                  Sign in
-                </Button>
-              )}
+              <Button onClick={redirect('/app/tasks')} color="inherit">
+                Tasks
+              </Button>
+              <Button onClick={signOut} color="inherit">
+                Sign out
+              </Button>
             </>
+          ) : (
+            <Button onClick={redirect('/sign-in')} color="inherit">
+              Sign in
+            </Button>
           )}
         </Toolbar>
       </AppBar>
       <Box height={64} />
     </>
   );
+};
+
+export const Navbar = () => {
+  const { redirect } = useHistory();
+  const { isUserAuthorized } = useUserAuthorization();
+  const { signOut } = useCurrentUserActions();
+
+  return <NavbarComponent redirect={redirect} authorized={isUserAuthorized} signOut={signOut} />;
 };

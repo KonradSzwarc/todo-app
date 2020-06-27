@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render } from '@/utils/test';
 
-import { Default, Empty, Loading, WithPinnedTasks } from './TaskList.stories';
+import { Default, Empty, Loading } from './TaskList.stories';
 
 jest.mock('@material-ui/icons/Inbox', () => () => '123');
 
@@ -13,15 +13,6 @@ describe('TaskList', () => {
     const taskList = getByTestId('task-list');
 
     expect(taskList).toBeInTheDocument();
-  });
-
-  it('renders pinned tasks at the start of the list', () => {
-    const { getAllByTestId } = render(<WithPinnedTasks />);
-
-    const tasks = getAllByTestId(/task-\d+/) as HTMLElement[];
-
-    expect(tasks[0]).toHaveAttribute('data-testid', 'task-6');
-    expect(tasks[1]).toHaveAttribute('data-testid', 'task-1');
   });
 
   it('renders empty screen if there are no tasks', () => {

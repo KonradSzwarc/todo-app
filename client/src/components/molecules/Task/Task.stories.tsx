@@ -1,6 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import React from 'react';
 
+import { TaskStatus } from '@/models/TaskStatus';
+
 import { Task } from './Task';
 import { TaskSkeleton } from './TaskSkeleton';
 
@@ -13,8 +15,7 @@ export default {
 export const taskData = {
   id: '1',
   title: 'Test Task',
-  status: 'TODO' as const,
-  pinned: false,
+  status: TaskStatus.TODO,
 };
 
 export const actionsData = {
@@ -24,8 +25,6 @@ export const actionsData = {
 
 export const Default = () => <Task {...taskData} {...actionsData} />;
 
-export const Pinned = () => <Task {...taskData} pinned {...actionsData} />;
-
-export const Done = () => <Task {...taskData} status="DONE" {...actionsData} />;
+export const Done = () => <Task {...taskData} status={TaskStatus.DONE} {...actionsData} />;
 
 export const Loading = () => <TaskSkeleton />;

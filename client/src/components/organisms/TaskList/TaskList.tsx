@@ -7,14 +7,12 @@ import { Task, TaskProps } from '@/components/molecules/Task';
 import { TaskListEmpty } from './TaskListEmpty';
 import { TaskListLoading } from './TaskListLoading';
 
-type TaskMethods = 'onPinClick' | 'onDoneClick';
-
-type TaskListProps = Pick<TaskProps, TaskMethods> & {
+export type TaskListProps = Pick<TaskProps, 'onDoneClick'> & {
   loading?: boolean;
-  tasks: Omit<TaskProps, TaskMethods>[];
+  tasks: Omit<TaskProps, 'onDoneClick'>[];
 };
 
-export const TaskList = ({ loading, tasks, onPinClick, onDoneClick }: TaskListProps) => {
+export const TaskList = ({ loading, tasks, onDoneClick }: TaskListProps) => {
   if (loading) {
     return <TaskListLoading />;
   }
@@ -23,17 +21,11 @@ export const TaskList = ({ loading, tasks, onPinClick, onDoneClick }: TaskListPr
     return <TaskListEmpty />;
   }
 
-  const orderedTasks = tasks.sort((a, b) => {
-    if (a.pinned && !b.pinned) return -1;
-    if (!a.pinned && b.pinned) return 1;
-    return 0;
-  });
-
   return (
     <Paper data-testid="task-list">
-      {orderedTasks.map((task, i) => (
+      {tasks.map((task, i) => (
         <Fragment key={task.id}>
-          <Task {...task} onPinClick={onPinClick} onDoneClick={onDoneClick} />
+          <Task {...task} onDoneClick={onDoneClick} />
           {i < tasks.length - 1 && <Divider />}
         </Fragment>
       ))}

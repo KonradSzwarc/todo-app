@@ -19,9 +19,9 @@ const currentUserSlice = createSlice({
       state.status = 'loading';
       state.error = null;
     },
-    fetchCurrentUserSuccess: (state, action: PayloadAction<User>) => {
+    fetchCurrentUserSuccess: (state, action: PayloadAction<User | undefined>) => {
       state.status = 'success';
-      state.data = action.payload;
+      state.data = action.payload || null;
       state.error = null;
     },
     fetchCurrentUserFailure: (state, action: PayloadAction<string>) => {
@@ -89,6 +89,8 @@ export function* currentUserSagaWatcher() {
   yield takeEvery(actions.signOutRequest.type, signOutSagaWorker);
 }
 
+export const currentUserSelector = (state: RootState) => state.currentUser;
+
 export const useCurrentUserActions = () => {
   const dispatch = useDispatch();
 
@@ -101,8 +103,6 @@ export const useCurrentUserActions = () => {
     dispatch,
   );
 };
-
-export const currentUserSelector = (state: RootState) => state.currentUser;
 
 export const useCurrentUserState = () => useSelector(currentUserSelector);
 
