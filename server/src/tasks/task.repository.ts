@@ -14,7 +14,7 @@ export class TaskRepository extends Repository<Task> {
     return taskRecord;
   }
 
-  async patchOrFail(userId: string, taskId: string, task: Partial<Task>) {
+  async updateOrFail(userId: string, taskId: string, task: Partial<Task>) {
     const taskRecord = await this.findByIdOrFail(userId, taskId);
 
     return this.save({

@@ -12,7 +12,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  queryAllUsers(): Promise<UserEntity[]> {
+  findAllUsers(): Promise<UserEntity[]> {
     return this.usersService.findAll();
   }
 

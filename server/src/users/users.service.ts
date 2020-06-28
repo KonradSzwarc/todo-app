@@ -24,10 +24,6 @@ export class UsersService {
     return this.userRepository.findByEmail(email);
   }
 
-  findOneOrFail(userId: string) {
-    return this.userRepository.findByIdOrFail(userId);
-  }
-
   create(createUserDto: CreateUserDto) {
     return this.userRepository.save(createUserDto);
   }

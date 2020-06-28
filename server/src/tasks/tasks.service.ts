@@ -23,7 +23,7 @@ export class TasksService {
   }
 
   async update(userId: string, taskId: string, updateTaskDto: UpdateTaskDto) {
-    return this.taskRepository.patchOrFail(userId, taskId, updateTaskDto);
+    return this.taskRepository.updateOrFail(userId, taskId, updateTaskDto);
   }
 
   async delete(userId: string, taskId: string) {

@@ -3,8 +3,8 @@ import { AxiosResponse } from 'axios';
 import { User } from '@/models/User';
 import { apiClient } from '@/utils/apiClient';
 
-export type QueryAllUsersResponse = AxiosResponse<User[]>;
+export type FindAllUsersResponse = AxiosResponse<User[]>;
 
-export function queryAllUsersRequest(): Promise<QueryAllUsersResponse> {
+export function findAllUsersRequest(): Promise<FindAllUsersResponse> {
   return apiClient.get(`/users`);
 }

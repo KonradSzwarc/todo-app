@@ -2,8 +2,8 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import React, { memo, useEffect, useRef } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import { useEffectOnce } from 'react-use';
 
+import { useKeySequence } from '@/hooks/useKeySequence';
 import { useCurrentUserState } from '@/store/currentUser';
 import { FC } from '@/typings/components';
 
@@ -12,25 +12,6 @@ import { Language } from './types';
 
 export type TranslationProviderProps = {
   language?: Language;
-};
-
-const useKeySequence = (sequence: string, callback: () => void) => {
-  const pressed: string[] = [];
-
-  useEffectOnce(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      pressed.push(e.key);
-      pressed.splice(-sequence.length - 1, pressed.length - sequence.length);
-
-      if (pressed.join('') === sequence) {
-        callback();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  });
 };
 
 export const PureTranslationProvider: FC<TranslationProviderProps> = memo(

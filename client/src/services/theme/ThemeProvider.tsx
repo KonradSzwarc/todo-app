@@ -6,6 +6,7 @@ import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming';
 import React, { memo, useEffect } from 'react';
 import { useLocalStorage } from 'react-use';
 
+import { useKeySequence } from '@/hooks/useKeySequence';
 import { Language, useI18n } from '@/services/translation';
 import { useCurrentUserState } from '@/store/currentUser';
 import { FC } from '@/typings/components';
@@ -29,7 +30,11 @@ export const PureThemeProvider: FC<ThemeProviderProps> = memo(
       if (theme) {
         setThemeKey(theme);
       }
-    }, [theme, setThemeKey]);
+    }, [theme]);
+
+    useKeySequence('themee', () => {
+      setThemeKey(themeKey === 'light' ? 'dark' : 'light');
+    });
 
     const languageObject = languages[language];
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

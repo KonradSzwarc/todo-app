@@ -1,7 +1,7 @@
 import { bindActionCreators, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { put, select, takeEvery } from 'redux-saga/effects';
 
-import { queryAllTasksRequest, QueryAllTasksResponse } from '@/api/task/queryAllTasks';
+import { findAllTasksRequest, FindAllTasksResponse } from '@/api/task/findAllTasks';
 import { UpdateTaskBody, UpdateTaskParams, updateTaskRequest, UpdateTaskResponse } from '@/api/task/updateTask';
 import { useDispatch } from '@/hooks/useDispatch';
 import { useSelector } from '@/hooks/useSelector';
@@ -51,7 +51,7 @@ export const tasksSelector = (state: RootState) => state.tasks;
 
 function* fetchTasksSagaWorker() {
   try {
-    const response: QueryAllTasksResponse = yield queryAllTasksRequest();
+    const response: FindAllTasksResponse = yield findAllTasksRequest();
     yield put(actions.fetchTasksSuccess(response.data));
   } catch (ex) {
     yield put(actions.fetchTasksFailure(ex.message));
