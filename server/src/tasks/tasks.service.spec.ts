@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TasksService } from './tasks.service';
@@ -36,6 +37,10 @@ const mockTaskRepository = () => ({
   delete: jest.fn(({ id, userId }) => {
     if (id === correctTaskId && userId === correctUserId) return Promise.resolve({ affected: 1 });
     return Promise.resolve({ affected: 0 });
+  }),
+  findByIdOrFail: jest.fn((userId, taskId) => {
+    if (taskId === correctTaskId && userId === correctUserId) return Promise.resolve(mockTask);
+    return Promise.reject(new NotFoundException());
   }),
 });
 

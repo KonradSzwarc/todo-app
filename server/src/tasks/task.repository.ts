@@ -13,23 +13,4 @@ export class TaskRepository extends Repository<Task> {
 
     return taskRecord;
   }
-
-  async updateOrFail(userId: string, taskId: string, task: Partial<Task>) {
-    const taskRecord = await this.findByIdOrFail(userId, taskId);
-
-    return this.save({
-      ...taskRecord,
-      ...task,
-    });
-  }
-
-  async deleteOrFail(userId: string, taskId: string) {
-    const result = await this.delete({ id: taskId, userId });
-
-    if (result.affected === 0) {
-      throw new NotFoundException();
-    }
-
-    return result;
-  }
 }
