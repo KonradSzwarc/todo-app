@@ -1,8 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import React from 'react';
 
-import { TaskStatus } from '@/models/TaskStatus';
-
 import { Task } from './Task';
 import { TaskSkeleton } from './TaskSkeleton';
 
@@ -15,7 +13,7 @@ export default {
 export const taskData = {
   id: '1',
   title: 'Test Task',
-  status: TaskStatus.TODO,
+  isDone: false,
 };
 
 export const actionsData = {
@@ -25,6 +23,6 @@ export const actionsData = {
 
 export const Default = () => <Task {...taskData} {...actionsData} />;
 
-export const Done = () => <Task {...taskData} status={TaskStatus.DONE} {...actionsData} />;
+export const Done = () => <Task {...taskData} isDone {...actionsData} />;
 
 export const Loading = () => <TaskSkeleton />;

@@ -1,10 +1,9 @@
-import { TaskStatus } from './TaskStatus';
 import { User } from './User';
 
 export type Task = {
-  status: TaskStatus;
   id: string;
   title: string;
+  isDone: boolean;
   user: User;
   userId: string;
 };

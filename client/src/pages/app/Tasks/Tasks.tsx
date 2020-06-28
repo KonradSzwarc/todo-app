@@ -12,8 +12,8 @@ const Tasks = () => {
     fetchTasks();
   });
 
-  const handleDone: TaskListProps['onDoneClick'] = (id, status) => {
-    updateTask({ params: { id }, body: { status } });
+  const handleDone: TaskListProps['onDoneClick'] = (id, isDone) => {
+    updateTask({ params: { id }, body: { isDone } });
   };
 
   return <TaskList tasks={tasks.data} loading={tasks.status === 'loading'} onDoneClick={handleDone} />;

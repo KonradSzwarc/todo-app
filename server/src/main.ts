@@ -18,7 +18,7 @@ async function bootstrap() {
   app.use(helmet());
   app.use(authMiddleware(configService));
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: true, forbidNonWhitelisted: true, whitelist: true }));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
   app.useGlobalInterceptors(new EmptyResponseInterceptor());
 

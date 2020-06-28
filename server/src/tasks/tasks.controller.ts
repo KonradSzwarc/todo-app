@@ -1,4 +1,4 @@
-import { Controller, Body, Param, Get, Post, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Body, Param, Get, Post, Delete, UseGuards, Patch } from '@nestjs/common';
 import { ApiSecurity } from '@nestjs/swagger';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -23,7 +23,7 @@ export class TasksController {
     return this.tasksService.create(userId, createTaskDto);
   }
 
-  @Put(':id')
+  @Patch(':id')
   updateTask(
     @User('id') userId: string,
     @Param('id') taskId: string,

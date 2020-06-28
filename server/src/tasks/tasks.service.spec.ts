@@ -2,7 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TasksService } from './tasks.service';
 import { TaskRepository } from './task.repository';
-import { Task, TaskStatus } from './task.entity';
+import { Task } from './task.entity';
 
 const correctUserId = '1';
 const incorrectUserId = '2';
@@ -12,7 +12,7 @@ const incorrectTaskId = '2';
 const mockTask: Omit<Task, 'user'> = {
   id: correctTaskId,
   title: 'Some task',
-  status: TaskStatus.TODO,
+  isDone: false,
   userId: correctUserId,
 };
 
@@ -30,7 +30,7 @@ const mockTaskRepository = () => ({
     if (id === correctTaskId && userId === correctUserId) return Promise.resolve(mockTask);
     return Promise.resolve();
   }),
-  save: jest.fn((data) => {
+  save: jest.fn((data: Partial<typeof mockTask>) => {
     return { ...mockTask, ...data };
   }),
   delete: jest.fn(({ id, userId }) => {
