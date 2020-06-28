@@ -17,7 +17,7 @@ export const taskData = {
 };
 
 export const actionsData = {
-  onPinClick: action('onPinClick'),
+  onDeleteClick: action('onDeleteClick'),
   onDoneClick: action('onDoneClick'),
 };
 

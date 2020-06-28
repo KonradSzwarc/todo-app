@@ -1,5 +1,4 @@
 import { Language } from './Language';
-import { Task } from './Task';
 import { ThemeKey } from './ThemeKey';
 
 export type User = {
@@ -9,5 +8,4 @@ export type User = {
   fullName: string;
   email: string;
   password: string;
-  tasks: Task[];
 };

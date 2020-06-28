@@ -4,7 +4,7 @@ import { Task } from '@/models/Task';
 import { apiClient } from '@/utils/apiClient';
 
 export type CreateTaskBody = {
-  content: string;
+  title: string;
 };
 
 export type CreateTaskResponse = AxiosResponse<Task>;

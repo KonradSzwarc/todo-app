@@ -55,6 +55,8 @@ const currentUserSlice = createSlice({
 
 const { actions } = currentUserSlice;
 
+export const currentUserSelector = (state: RootState) => state.currentUser;
+
 function* fetchCurrentUserSagaWorker() {
   try {
     const response: QueryCurrentUserResponse = yield queryCurrentUserRequest();
@@ -88,8 +90,6 @@ export function* currentUserSagaWatcher() {
   yield takeEvery(actions.signInRequest.type, signInSagaWorker);
   yield takeEvery(actions.signOutRequest.type, signOutSagaWorker);
 }
-
-export const currentUserSelector = (state: RootState) => state.currentUser;
 
 export const useCurrentUserActions = () => {
   const dispatch = useDispatch();

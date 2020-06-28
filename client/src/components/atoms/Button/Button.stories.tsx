@@ -10,18 +10,18 @@ export default {
 
 export const Contained = () => (
   <Button variant="contained" color="primary">
-    Default
+    Contained
   </Button>
 );
 
 export const Outlined = () => (
   <Button variant="outlined" color="primary">
-    Default
+    Outlined
   </Button>
 );
 
 export const Text = () => (
   <Button variant="text" color="primary">
-    Default
+    Text
   </Button>
 );
